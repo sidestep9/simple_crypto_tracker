@@ -1,4 +1,4 @@
-import requests, time, json
+import requests, time
 
 while True:
     res = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd")
@@ -6,16 +6,14 @@ while True:
 
     res_data = res.json()
 
-    with open("price_data.json", "r", encoding="utf-8") as file:
-        prev_data = json.load(file)
-    
-    print(prev_data)
-    
-    with open("price_data.json", "w") as file:
-        json.dump(res_data, file)
-
     print("\n=== CRYPTO PRICE TRACKER ===")
     for k, v in res_data.items():
+        with open("price_history.txt", "a") as file:
+            file.write(f"{k.upper()}: ${v["usd"]}")
+            file.write(" | ")
+
         print(f"{k.upper()}: ${v["usd"]}")
     print("============================")
+    with open("price_history.txt", "a") as file:
+            file.write("\n")
     time.sleep(30)
