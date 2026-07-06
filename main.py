@@ -9,10 +9,10 @@ while True:
     print("\n=== CRYPTO PRICE TRACKER ===")
     for k, v in res_data.items():
         with open("price_history.txt", "a") as file:
-            file.write(f"{k.upper()}: ${v["usd"]}")
+            file.write(f"{k.upper()}: ${v['usd']}")
             file.write(" | ")
 
-        print(f"{k.upper()}: ${v["usd"]}")
+        print(f"{k.upper()}: ${v['usd']}")
     print("============================")
     with open("price_history.txt", "a") as file:
             file.write("\n")
